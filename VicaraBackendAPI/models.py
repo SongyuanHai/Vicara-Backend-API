@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.utils import timezone
+from datetime import date
 # Create your models here.
 
 class UserProfileManager(BaseUserManager):
@@ -84,5 +86,27 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         """Django uses this when it needs to convert the object to text."""
 
         return self.email
+    
+    
+class TimeSheet(models.Model):
+    """User timesheet create"""
+
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    employeeID = models.CharField(max_length = 128, unique = True)
+    name = models.CharField(max_length = 128)
+    location = models.CharField(max_length = 128)
+    project_code = models.CharField(max_length=128)
+    date = models.DateField(default=date.today)
+    start_time = models.TimeField(default=timezone.now)
+    end_time = models.TimeField(default=timezone.now)
+    break_hour = models.TimeField()
+    work_hour = models.TimeField()
+    approval_status = models.CharField(max_length=128)
+    description = models.CharField(max_length = 255)
+
+    def __str__(self):
+        """Return the model as a string."""
+
+        return self.name
 
 

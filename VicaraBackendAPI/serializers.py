@@ -27,3 +27,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    
+class TimeSheetSerializer(serializers.ModelSerializer):
+    """A serializer for profile feed items."""
+
+    class Meta:
+        model = models.TimeSheet
+        fields = '__all__'
+        extra_kwargs = {'user_profile': {'read_only': True}}
