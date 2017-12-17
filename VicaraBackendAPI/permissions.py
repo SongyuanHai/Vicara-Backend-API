@@ -21,7 +21,7 @@ class PostOwnTimesheet(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         
-        if obj.approval_status == "Approved":
-            return False
+#         if obj.approval_status == "Approved":
+#             return False
 
         return obj.user_profile.id == request.user.id

@@ -108,5 +108,20 @@ class TimeSheet(models.Model):
         """Return the model as a string."""
 
         return self.name
+    
+
+class ProejctMaster(models.Model):
+    """Project master create"""
+    psp_element = models.CharField(max_length = 128, unique = True)
+    project_name = models.CharField(max_length = 128)
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
+    fixed_price = models.BooleanField()
+    
+    def __str__(self):
+        """Return the model as a string."""
+
+        return self.psp_element
+    
 
 

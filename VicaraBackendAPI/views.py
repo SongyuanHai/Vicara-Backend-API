@@ -9,6 +9,9 @@ from rest_framework import filters
 from . import serializers
 from . import models
 from . import permissions
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 # Create your views here.
@@ -24,9 +27,17 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,DjangoFilterBackend,)
+    filter_fields = ('level','first_name',)
     search_fields = ('first_name', 'email','level','role')
     
+    
+# Override ObtainAuthToken to get token and custom info
+class CustomObtainAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'id': token.user_id})
 
 class LoginViewSet(viewsets.ViewSet):
     """Checks email and password and returns an auth token."""
@@ -36,7 +47,8 @@ class LoginViewSet(viewsets.ViewSet):
     def create(self, request):
         """Use the ObtainAuthToken APIView to validate and create a token."""
 
-        return ObtainAuthToken().post(request)
+        return CustomObtainAuthToken().post(request)
+
     
 class TimeSheetViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating time sheet items."""
@@ -44,7 +56,9 @@ class TimeSheetViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.TimeSheetSerializer
     queryset = models.TimeSheet.objects.all()
-    permission_classes = (permissions.PostOwnTimesheet, IsAuthenticated)
+    permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated)
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('project_code',)
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""

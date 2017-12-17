@@ -7,7 +7,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserProfile
         fields = '__all__'
-    
+        
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -35,3 +35,13 @@ class TimeSheetSerializer(serializers.ModelSerializer):
         model = models.TimeSheet
         fields = '__all__'
         extra_kwargs = {'user_profile': {'read_only': True}}
+        
+
+class ProejctMasterSerializer(serializers.ModelSerializer):
+    """A serializer for project master objects."""
+    
+    class Meta:
+        model = models.ProejctMaster
+        fields = '__all__'
+        
+    
