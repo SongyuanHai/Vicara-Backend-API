@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//VicaraBackendAPI/migrations/0001_initial.py=utf-8
+encoding//VicaraBackendAPI/migrations/0002_timesheet.py=utf-8
+encoding//VicaraBackendAPI/migrations/0003_proejctmaster.py=utf-8
+encoding//VicaraBackendAPI/migrations/0004_auto_20171216_1733.py=utf-8

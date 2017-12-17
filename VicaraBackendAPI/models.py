@@ -110,7 +110,7 @@ class TimeSheet(models.Model):
         return self.name
     
 
-class ProejctMaster(models.Model):
+class ProjectMaster(models.Model):
     """Project master create"""
     psp_element = models.CharField(max_length = 128, unique = True)
     project_name = models.CharField(max_length = 128)

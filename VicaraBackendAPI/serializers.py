@@ -37,11 +37,11 @@ class TimeSheetSerializer(serializers.ModelSerializer):
         extra_kwargs = {'user_profile': {'read_only': True}}
         
 
-class ProejctMasterSerializer(serializers.ModelSerializer):
+class ProjectMasterSerializer(serializers.ModelSerializer):
     """A serializer for project master objects."""
     
     class Meta:
-        model = models.ProejctMaster
+        model = models.ProjectMaster
         fields = '__all__'
         
     
