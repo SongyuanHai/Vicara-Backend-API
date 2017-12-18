@@ -92,7 +92,7 @@ class TimeSheet(models.Model):
     """User timesheet create"""
 
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
-    employeeID = models.CharField(max_length = 128, unique = True)
+    employeeID = models.CharField(max_length = 128)
     name = models.CharField(max_length = 128)
     location = models.CharField(max_length = 128)
     project_code = models.CharField(max_length=128)

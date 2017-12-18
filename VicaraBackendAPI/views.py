@@ -61,7 +61,7 @@ class TimeSheetViewSet(viewsets.ModelViewSet):
     queryset = models.TimeSheet.objects.all()
     permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated)
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('project_code',)
+    filter_fields = ('project_code','user_profile',)
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user."""
