@@ -44,4 +44,9 @@ class ProjectMasterSerializer(serializers.ModelSerializer):
         model = models.ProjectMaster
         fields = '__all__'
         
+class ProjectAssignmentSerializer(serializers.ModelSerializer):
+    """A serializer for project assignment objects."""
     
+    class Meta:
+        model = models.ProjectAssignment
+        fields = '__all__'

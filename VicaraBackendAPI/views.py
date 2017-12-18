@@ -79,3 +79,13 @@ class ProjectMasterViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('project_name', 'start_date', 'end_date',)
     
+    
+class ProjectAssignmentViewSet(viewsets.ModelViewSet):
+    """Handles creating, creating and updating Project Assignment"""
+
+    serializer_class = serializers.ProjectAssignmentSerializer
+    queryset = models.ProjectAssignment.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('psp_element_number', 'user_email', 'role',)

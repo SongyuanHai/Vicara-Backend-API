@@ -4,3 +4,4 @@ from . import models
 admin.site.register(models.UserProfile)
 admin.site.register(models.TimeSheet)
 admin.site.register(models.ProjectMaster)
+admin.site.register(models.ProjectAssignment)

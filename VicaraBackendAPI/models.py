@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
 from datetime import date
+from django.db.transaction import on_commit
 # Create your models here.
 
 class UserProfileManager(BaseUserManager):
@@ -123,5 +124,15 @@ class ProjectMaster(models.Model):
 
         return self.psp_element
     
+class ProjectAssignment(models.Model):
+    """Assign user to project with different role"""
+    psp_element_number = models.ForeignKey(ProjectMaster,to_field='psp_element',on_delete=models.CASCADE)
+    user_email = models.ForeignKey(UserProfile,to_field='email',on_delete=models.CASCADE)
+    role = models.CharField(max_length = 128)
+    
+    def __str__(self):
+        """Return the model as a string."""
+        
+        return "%s %s" % (self.psp_element_number, self.user_email)
 
 
