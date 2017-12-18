@@ -76,8 +76,9 @@ class ProjectMasterViewSet(viewsets.ModelViewSet):
     queryset = models.ProjectMaster.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated,)
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('project_name', 'start_date', 'end_date',)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,)
+    filter_fields = ('project_name', 'start_date', 'end_date',)
+    
     
     
 class ProjectAssignmentViewSet(viewsets.ModelViewSet):
@@ -87,5 +88,6 @@ class ProjectAssignmentViewSet(viewsets.ModelViewSet):
     queryset = models.ProjectAssignment.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated,)
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (DjangoFilterBackend,filters.SearchFilter,)
     search_fields = ('psp_element_number', 'user_email', 'role',)
+    filter_fields = ('psp_element_number', 'user_email', 'role',)
