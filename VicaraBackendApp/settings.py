@@ -79,6 +79,16 @@ WSGI_APPLICATION = 'VicaraBackendApp.wsgi.application'
 
 DATABASES = {
     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vicara_backend_database',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    },
+    'azure_mysql': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vicara_backend_database',
         'USER': 'vicara_admin@vicara-azure-mysql',

@@ -9,8 +9,11 @@ class UpdateOwnProfile(permissions.BasePermission):
 
         if request.method in permissions.SAFE_METHODS:
             return True
+        
+        if request.user.role == 'Admin':
+            return True
 
-        return obj.id == request.user.id
+        return obj.id == request.user.id 
     
 class PostOwnTimesheet(permissions.BasePermission):
     """Allow users to update their own timesheet."""

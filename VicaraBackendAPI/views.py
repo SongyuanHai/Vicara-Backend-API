@@ -29,7 +29,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter, DjangoFilterBackend,)
-    filter_fields = ('level', 'first_name',)
+    filter_fields = ('level', 'first_name','email',)
     search_fields = ('first_name', 'email', 'level', 'role')
     
     
